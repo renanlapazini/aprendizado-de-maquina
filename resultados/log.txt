@@ -1,0 +1,68 @@
+Instâncias: 303 | Atributos: 14 (13 preditores + classe 'num')
+
+atributo       tipo         valores  faltantes
+     age   numérico         29 a 77          0
+     sex categórico          {0, 1}          0
+      cp categórico    {1, 2, 3, 4}          0
+trestbps   numérico        94 a 200          0
+    chol   numérico       126 a 564          0
+     fbs categórico          {0, 1}          0
+ restecg categórico       {0, 1, 2}          0
+ thalach   numérico        71 a 202          0
+   exang categórico          {0, 1}          0
+ oldpeak   numérico         0 a 6.2          0
+   slope categórico       {1, 2, 3}          0
+      ca categórico    {0, 1, 2, 3}          4
+    thal categórico       {3, 6, 7}          2
+     num categórico {0, 1, 2, 3, 4}          0
+
+Atributo mais desbalanceado (maior/menor classe): restecg = 37.8x
+restecg
+0.0    151
+2.0    148
+1.0      4
+
+Distribuição da classe 'num':
+num
+0    164
+1     55
+2     36
+3     35
+4     13
+
+===== Variação A - multiclasse =====
+        Algoritmo  Acurácia  Precisão  Recall  F-Measure  Tempo treino (s)
+Árvore de Decisão     0.508     0.343   0.328      0.329             0.003
+      Naive Bayes     0.561     0.323   0.345      0.327             0.002
+    Random Forest     0.561     0.288   0.307      0.285             0.133
+
+Desempenho por classe - Árvore de Decisão (melhor F-Measure):
+              precision    recall  f1-score   support
+
+           0      0.769     0.750     0.759       164
+           1      0.226     0.255     0.239        55
+           2      0.242     0.222     0.232        36
+           3      0.167     0.171     0.169        35
+           4      0.250     0.231     0.240        13
+
+    accuracy                          0.508       303
+   macro avg      0.331     0.326     0.328       303
+weighted avg      0.516     0.508     0.512       303
+
+
+===== Variação B - binário =====
+        Algoritmo  Acurácia  Precisão  Recall  F-Measure  Tempo treino (s)
+Árvore de Decisão     0.689     0.694   0.688      0.685             0.002
+      Naive Bayes     0.838     0.843   0.834      0.835             0.003
+    Random Forest     0.835     0.843   0.831      0.832             0.116
+
+Desempenho por classe - Naive Bayes (melhor F-Measure):
+              precision    recall  f1-score   support
+
+           0      0.832     0.878     0.855       164
+           1      0.846     0.791     0.818       139
+
+    accuracy                          0.838       303
+   macro avg      0.839     0.835     0.836       303
+weighted avg      0.839     0.838     0.838       303
+

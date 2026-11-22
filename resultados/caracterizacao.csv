@@ -1,0 +1,15 @@
+atributo,tipo,valores,faltantes
+age,numérico,29 a 77,0
+sex,categórico,"{0, 1}",0
+cp,categórico,"{1, 2, 3, 4}",0
+trestbps,numérico,94 a 200,0
+chol,numérico,126 a 564,0
+fbs,categórico,"{0, 1}",0
+restecg,categórico,"{0, 1, 2}",0
+thalach,numérico,71 a 202,0
+exang,categórico,"{0, 1}",0
+oldpeak,numérico,0 a 6.2,0
+slope,categórico,"{1, 2, 3}",0
+ca,categórico,"{0, 1, 2, 3}",4
+thal,categórico,"{3, 6, 7}",2
+num,categórico,"{0, 1, 2, 3, 4}",0
