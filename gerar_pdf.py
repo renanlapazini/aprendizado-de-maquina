@@ -9,8 +9,9 @@ BASE = Path(__file__).parent.resolve()
 EDGE = r"C:\Program Files (x86)\Microsoft\Edge\Application\msedge.exe"
 CAPA = """<div class="capa">
 <div><b>UNIVERSIDADE FEEVALE</b><br><br>Iago Mauri<br>Renan Lapazini</div>
-<div><b>APRENDIZADO DE MÁQUINA: CLASSIFICAÇÃO DE DOENÇA CARDÍACA</b></div>
-<div>Novo Hamburgo<br>2026</div></div>"""
+<div><b>APRENDIZADO DE MÁQUINA: CLASSIFICAÇÃO DE DOENÇA CARDÍACA</b><br><br>
+Trabalho da disciplina de Inteligência Artificial</div>
+<div>Novo Hamburgo<br>26 de novembro de 2026</div></div>"""
 # ABNT NBR 14724: A4, margens sup./esq. 3 cm e inf./dir. 2 cm, Arial 12, entrelinha 1,5,
 # recuo de parágrafo 1,25 cm, legendas/fontes/tabelas em tamanho menor (10),
 # página contada desde a capa e numerada no canto superior direito a partir do texto.

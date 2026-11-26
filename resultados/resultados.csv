@@ -1,7 +1,7 @@
-Variação,Algoritmo,Acurácia,Precisão,Recall,F-Measure,Tempo treino (s)
-A - multiclasse,Árvore de Decisão,0.508,0.343,0.328,0.329,0.003
-A - multiclasse,Naive Bayes,0.561,0.323,0.345,0.327,0.002
-A - multiclasse,Random Forest,0.561,0.288,0.307,0.285,0.133
-B - binário,Árvore de Decisão,0.689,0.694,0.688,0.685,0.002
-B - binário,Naive Bayes,0.838,0.843,0.834,0.835,0.003
-B - binário,Random Forest,0.835,0.843,0.831,0.832,0.116
+Variação,Algoritmo,Acurácia,Precisão,Recall,F-Measure,Tempo treino (s),Acurácia treino
+A - multiclasse,Árvore de Decisão,0.508,0.343,0.328,0.329,0.002,1.0
+A - multiclasse,Naive Bayes,0.561,0.323,0.345,0.327,0.002,0.624
+A - multiclasse,Random Forest,0.561,0.288,0.307,0.285,0.089,1.0
+B - binário,Árvore de Decisão,0.689,0.694,0.688,0.685,0.002,1.0
+B - binário,Naive Bayes,0.838,0.843,0.834,0.835,0.001,0.857
+B - binário,Random Forest,0.835,0.843,0.831,0.832,0.13,1.0

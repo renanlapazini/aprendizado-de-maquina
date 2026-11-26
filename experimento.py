@@ -3,7 +3,6 @@
 Uso: python experimento.py
 Gera: dados/*.csv (pré-processados), resultados/ (log, tabelas, gráficos), modelos/ (.joblib)
 """
-import time
 import warnings
 from pathlib import Path
 
@@ -82,10 +81,14 @@ for nome_var, dados in [("A - multiclasse", multi), ("B - binário", bina)]:
     out(f"\n===== Variação {nome_var} =====")
     linhas = []
     for nome, modelo in ALGORITMOS.items():
-        r = cross_validate(modelo, X, y, cv=cv, scoring=list(metricas))
+        r = cross_validate(modelo, X, y, cv=cv, scoring=list(metricas), return_train_score=True)
         linha = {"Variação": nome_var, "Algoritmo": nome}
         linha.update({rot: r[f"test_{m}"].mean() for m, rot in metricas.items()})
-        t0 = time.perf_counter(); modelo.fit(X, y); linha["Tempo treino (s)"] = time.perf_counter() - t0
+        # Tempo: média do treino nos 10 folds (mais estável que uma única medição)
+        linha["Tempo treino (s)"] = r["fit_time"].mean()
+        # Acurácia nos próprios dados de treino de cada fold (comparada à de teste, indica sobreajuste)
+        linha["Acurácia treino"] = r["train_accuracy"].mean()
+        modelo.fit(X, y)  # modelo final, treinado com a base completa, salvo em modelos/
         linhas.append(linha)
     tab = pd.DataFrame(linhas)
     out(tab.drop(columns="Variação").round(3).to_string(index=False))

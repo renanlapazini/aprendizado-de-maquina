@@ -6,7 +6,7 @@ O atributo classe (*target*) é `num`, que indica o grau de estreitamento das ar
 
 ## 2 Caracterização dos dados
 
-O dataset possui 303 instâncias e 14 atributos, sendo 13 preditores e a classe. A Tabela 1 apresenta o tipo, o intervalo ou conjunto de valores e a quantidade de valores faltantes de cada atributo. Destacam-se os seguintes pontos:
+O dataset possui 303 instâncias e 14 atributos, sendo 13 preditores e a classe. Por ser uma base pequena, ela é viável para o experimento sem necessidade de reduzir instâncias ou atributos. A Tabela 1 apresenta o tipo, o intervalo ou conjunto de valores e a quantidade de valores faltantes de cada atributo. Destacam-se os seguintes pontos:
 
 1. dois atributos possuem valores faltantes: `ca` (4) e `thal` (2), totalizando 6 valores;
 2. o atributo mais desbalanceado é `restecg`, com 151, 148 e apenas 4 instâncias em seus três valores, uma razão de 37,8 vezes entre a maior e a menor classe;
@@ -42,7 +42,7 @@ Foram realizados os seguintes procedimentos de pré-processamento:
 2. variação A (multiclasse): a classe `num` foi mantida com 5 valores (0 a 4), tratada como nominal, gerando o arquivo `dados/heart_multiclasse.csv`;
 3. variação B (binária): `num` foi convertida em booleano (0 = ausência; 1 a 4 = presença), como fazem os estudos citados no repositório, gerando o arquivo `dados/heart_binario.csv`.
 
-Os experimentos foram executados pelo script `experimento.py`, em Python com a biblioteca scikit-learn (PEDREGOSA et al., 2011), usando validação cruzada estratificada de 10 *folds*. Precisão, *recall* e *F-Measure* são médias macro, em que todas as classes têm o mesmo peso. O tempo é o de treino do modelo com a base completa, em segundos. Os arquivos de entrada (originais e pré-processados), os modelos, o script e os logs estão disponíveis em <https://github.com/renanlapazini/aprendizado-de-maquina>.
+Os experimentos foram executados pelo script `experimento.py`, em Python com a biblioteca scikit-learn (PEDREGOSA et al., 2011), usando validação cruzada estratificada de 10 *folds*. Precisão, *recall* e *F-Measure* são médias macro, em que todas as classes têm o mesmo peso. O tempo é a média, em segundos, do treino do modelo nos 10 *folds* da validação cruzada. Os arquivos de entrada (originais e pré-processados), os modelos, o script e os logs estão disponíveis em <https://github.com/renanlapazini/aprendizado-de-maquina>.
 
 ## 4 Resultados
 
@@ -54,7 +54,7 @@ Tabela 2 – Resultados da variação A (multiclasse, 0 a 4)
 |---|---|---|---|---|---|
 | Árvore de Decisão | 50,8% | 0,343 | 0,328 | **0,329** | 0,002 |
 | Naive Bayes | **56,1%** | 0,323 | **0,345** | 0,327 | 0,002 |
-| Random Forest | **56,1%** | 0,288 | 0,307 | 0,285 | 0,121 |
+| Random Forest | **56,1%** | 0,288 | 0,307 | 0,285 | 0,089 |
 
 Fonte: elaborado pelos autores (2026).
 
@@ -64,7 +64,7 @@ Tabela 3 – Resultados da variação B (binária: ausência ou presença)
 |---|---|---|---|---|---|
 | Árvore de Decisão | 68,9% | 0,694 | 0,688 | 0,685 | 0,002 |
 | **Naive Bayes** | **83,8%** | **0,843** | **0,834** | **0,835** | **0,001** |
-| Random Forest | 83,5% | **0,843** | 0,831 | 0,832 | 0,126 |
+| Random Forest | 83,5% | **0,843** | 0,831 | 0,832 | 0,130 |
 
 Fonte: elaborado pelos autores (2026).
 
@@ -76,7 +76,7 @@ Fonte: elaborado pelos autores (2026).
 
 ## 5 Conclusões
 
-O melhor resultado foi o do Naive Bayes na variação binária, com acurácia de 83,8%, precisão de 0,843, *recall* de 0,834 e *F-Measure* de 0,835. Ele também teve o treino mais rápido (0,001 s). O Random Forest chegou praticamente ao mesmo resultado, mas levou cerca de 100 vezes mais tempo para treinar.
+O melhor resultado foi o do Naive Bayes na variação binária, com acurácia de 83,8%, precisão de 0,843, *recall* de 0,834 e *F-Measure* de 0,835. O Random Forest chegou praticamente ao mesmo resultado, mas é bem mais lento: cerca de 0,13 s por treino, contra 1 a 2 milissegundos do Naive Bayes e da Árvore de Decisão. Entre esses dois, a diferença de tempo é pequena demais para apontar um mais rápido.
 
 O pior resultado foi o do Random Forest na variação multiclasse, com *F-Measure* de 0,285 e acurácia de 56,1%. Com 5 classes e poucas instâncias nas classes 1 a 4, o modelo favorece a classe majoritária: 68% das suas predições são de classe 0, que na base real representa 54%. Por isso a acurácia parece razoável, mas a média macro fica baixa.
 
@@ -91,7 +91,7 @@ Tabela 4 – Desempenho por valor do atributo classe
 
 Fonte: elaborado pelos autores (2026).
 
-Em comparação com o repositório, os trabalhos citados na documentação do dataset (JANOSI et al., 1988) também tratam o problema como binário e relatam acurácias de 74,8% (C4), 77,0% (NTgrowth) e 78,9% (CLASSIT) na base Cleveland. O Naive Bayes (83,8%) e o Random Forest (83,5%) ficaram acima dessas referências. A Árvore de Decisão sem poda (68,9%) ficou abaixo do C4, o que indica sobreajuste. Prever o grau exato da doença (0 a 4) com apenas 303 instâncias não se mostrou viável, e a binarização da classe foi o pré-processamento que mais melhorou o resultado.
+Em comparação com o repositório, os trabalhos citados na documentação do dataset (JANOSI et al., 1988) também tratam o problema como binário e relatam acurácias de 74,8% (C4), 77,0% (NTgrowth) e 78,9% (CLASSIT) na base Cleveland. O Naive Bayes (83,8%) e o Random Forest (83,5%) ficaram acima dessas referências. A Árvore de Decisão sem poda (68,9%) ficou abaixo do C4 por sobreajuste: ela acerta 100% das instâncias de treino, mas apenas 68,9% na validação cruzada, ou seja, memoriza os dados em vez de generalizar. O Random Forest também chega a 100% no treino, mas a combinação de 100 árvores reduz esse efeito e mantém 83,5% na validação. Prever o grau exato da doença (0 a 4) com apenas 303 instâncias não se mostrou viável, e a binarização da classe foi o pré-processamento que mais melhorou o resultado.
 
 # Referências
 
